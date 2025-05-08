@@ -76,8 +76,21 @@ const loginUser = async (req, res) =>{
 }
 
 // User Info 
-const getuserInfo = async (req, res) =>{
+const getUserInfo = async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id).select('-password');
 
-}
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
 
-module.exports = {registerUser,loginUser,getuserInfo}
+        // Send user info if found
+        res.status(200).json(user);
+
+    } catch (err) {
+        res.status(500).json({ message: 'Error finding user', error: err.message });
+    }
+};
+
+
+module.exports = {registerUser,loginUser,getUserInfo}
