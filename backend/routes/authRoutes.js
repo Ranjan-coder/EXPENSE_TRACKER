@@ -3,7 +3,15 @@ const router = express.Router()
 
 const { protect } = require('../middleware/authMiddleware')
 const { registerUser, loginUser, getUserInfo, uploadImage } = require('../controllers/authController')
+
+// if cloudinary added then comment this 
 const upload = require('../middleware/uploadMiddleware')
+
+// For cloudinary 
+// const multer = require('multer');
+// const storage = require('../middleware/cloudinaryStorage');
+// const upload = multer({ storage });
+
 
 
 router.post('/register',registerUser)
@@ -17,16 +25,5 @@ router.get('/getUser',protect,getUserInfo)
 router.post('/uploadImage', upload.single('image'), uploadImage);
 
 
-// image upload 
-
-// router.post('/uploadImage', upload.single('image'), (req, res) =>{
-//     if (!req.file) {
-//         return res.status(400).json({message : 'No file uploaded'})
-//     }
-//     const imageUrl = `${req.protocol}://${req.get('host')}/uploads/${
-//         req.file.filename
-//     }`;
-//     res.status(200).json({imageUrl})
-// })
 
 module.exports = router

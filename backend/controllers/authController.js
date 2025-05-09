@@ -104,4 +104,17 @@ const uploadImage = (req, res) => {
 };
 
 
+// Cloudinary image upload 
+// const uploadImage = (req, res) => {
+//     if (!req.file || !req.file.path) {
+//         return res.status(400).json({ message: 'Image upload failed' });
+//     }
+
+//     // Cloudinary image URL
+//     res.status(200).json({ imageUrl: req.file.path });
+// };
+
+
+
+
 module.exports = {registerUser,loginUser,getUserInfo,uploadImage}
