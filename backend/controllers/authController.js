@@ -93,4 +93,15 @@ const getUserInfo = async (req, res) => {
 };
 
 
-module.exports = {registerUser,loginUser,getUserInfo}
+// image upload 
+const uploadImage = (req, res) => {
+    if (!req.file) {
+        return res.status(400).json({ message: 'No file uploaded' });
+    }
+
+    const imageUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
+    res.status(200).json({ imageUrl });
+};
+
+
+module.exports = {registerUser,loginUser,getUserInfo,uploadImage}
