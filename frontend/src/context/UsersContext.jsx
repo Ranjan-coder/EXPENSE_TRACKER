@@ -1,16 +1,17 @@
 import React, { createContext, useState } from 'react';
 
-export const UserContext = createContext(null);
+// export const UserContext = createContext(null);
+export const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  // Update user data
+  // function to Update user data
   const updateUser = (userData) => {
     setUser(userData);
   };
 
-  // Clear user data (e.g., on logout)
+  // function to Clear user data (e.g., on logout)
   const clearUser = () => {
     setUser(null);
   };

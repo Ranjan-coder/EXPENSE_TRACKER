@@ -4,14 +4,14 @@ import SignUp from './pages/Auth/SignUp';
 import Home from './pages/Dashboard/Home';
 import Income from './pages/Dashboard/Income';
 import Expense from './pages/Dashboard/Expense';
-import UserProvider from './context/UsersContext';
+// import UserProvider from './context/UsersContext';
 
 
 function App() {
 
 
   return (
-    <UserProvider>
+    // <UserProvider>
     <>
   
     <Routes>
@@ -24,7 +24,7 @@ function App() {
     </Routes>
      
     </>
-    </UserProvider>
+    // </UserProvider>
   )
 }
 
