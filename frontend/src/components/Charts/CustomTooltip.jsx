@@ -2,7 +2,7 @@ import React from 'react'
 
 const CustomTooltip = ({ active, payload}) => {
     // console.log('payload type map : ',payload.map((name, index) => (name.name)))
-    console.log('payload type map : ',payload)
+    // console.log('payload type map : ',payload)
     if (active && payload.length) {
         return (
             <div className='bg-white shadow-md rounded-lg p-2 border-gray-300'>

@@ -7,7 +7,7 @@ const RecentIncomeWithChart = ({ data, totalIncome }) => {
 
     const [chartData, setChartData] = useState([])
 
-    console.log("RecentIncomeWithChart : ", data, totalIncome);
+    // console.log("RecentIncomeWithChart : ", data, totalIncome);
     
 
     const prepareChartData = () => {

@@ -12,7 +12,7 @@ const FinanceOverView = ({ totalBalance, totalIncome, totalExpense }) => {
 
     ]
 
-    console.log(balanceData[0].amount)
+    // console.log(balanceData[0].amount)
 
   return (
     <div className='card'>

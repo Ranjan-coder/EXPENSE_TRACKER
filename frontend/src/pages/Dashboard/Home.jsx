@@ -23,7 +23,7 @@ const Home = () => {
   const [loading, setLoading] = useState(false)
   
 
-  console.log("DashboardData Expense : ", dashboardData);
+  // console.log("DashboardData Expense : ", dashboardData);
   
 
   const Navigate = useNavigate()
