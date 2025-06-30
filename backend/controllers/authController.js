@@ -1,6 +1,18 @@
 const jwt = require('jsonwebtoken')
 const JWT_SECRET = process.env.JWT_SECRET
 const User = require('../models/User.model')
+// cloudinary setup
+const cloudinary = require('cloudinary').v2;
+const fs = require('fs');
+const path = require('path');
+
+// Cloudinary configuration
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
 
 
 // Generate Jwt Token 
@@ -93,28 +105,45 @@ const getUserInfo = async (req, res) => {
 };
 
 
-// image upload 
-const uploadImage = (req, res) => {
-    if (!req.file) {
-        return res.status(400).json({ message: 'No file uploaded' });
-    }
-
-    const imageUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
-    res.status(200).json({ imageUrl });
-};
-
-
-// Cloudinary image upload 
+// image upload locally
 // const uploadImage = (req, res) => {
-//     if (!req.file || !req.file.path) {
-//         return res.status(400).json({ message: 'Image upload failed' });
+//     if (!req.file) {
+//         return res.status(400).json({ message: 'No file uploaded' });
 //     }
 
-//     // Cloudinary image URL
-//     res.status(200).json({ imageUrl: req.file.path });
+//     const imageUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
+//     res.status(200).json({ imageUrl });
 // };
 
 
+
+
+const uploadImage = async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ message: 'No file uploaded' });
+    }
+
+    const localFilePath = path.join(__dirname, '../uploads', req.file.filename);
+
+    // Upload to Cloudinary
+    const result = await cloudinary.uploader.upload(localFilePath, {
+      folder: 'your_folder_name', // Optional: set your preferred folder in Cloudinary
+    });
+
+    // Delete local file after successful upload
+    fs.unlink(localFilePath, (err) => {
+      if (err) console.error('Error deleting local file:', err);
+    });
+
+    // Send response
+    res.status(200).json({ imageUrl: result.secure_url });
+
+  } catch (error) {
+    console.error('Image upload failed:', error);
+    res.status(500).json({ message: 'Image upload failed', error });
+  }
+};
 
 
 module.exports = {registerUser,loginUser,getUserInfo,uploadImage}
