@@ -16,7 +16,8 @@ function App() {
     <>
   
     <Routes>
-      <Route path='/' element={<Root/>} />
+      {/* <Route path='/' element={<Root/>} /> // this is the default one to prevent 404 page not found comment this one  */}
+      <Route path='/login' element={<Root/>} />
       <Route path='/login' exact element={<Login />} />
       <Route path='/signUp' exact element={<SignUp />} />
       <Route path='/dashboard' exact element={<Home />} />
